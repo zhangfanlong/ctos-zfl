@@ -1,2 +1,0 @@
-包含四个件：分别为bootstrap_ipc.c,receive_integer.c,send_integer.c和ipc-hello.c.
-对这四个件的说明如下：
