@@ -1,6 +1,6 @@
 /*this is an exaple about chtread
 
-waring: pass -lthread to gcc
+waring: pass -lthreads to gcc
 */
 
 #include <cthreads.h>
