@@ -3,7 +3,7 @@
 waring: pass -lthread to gcc
 */
 
-#include <cthread.h>
+#include <cthreads.h>
 #include <stdio.h>
 //cthread_init();
 //cthread_t function_thread;
