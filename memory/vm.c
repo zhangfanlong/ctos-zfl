@@ -94,7 +94,7 @@ kern_return_t vm_machine_attribute (
 /**/
 	
 //vm_read 可以在不同的任务中;
-/*	rtn = vm_read(mach_task_self(), *data1, vm_page_size, data2, &data_cnt);
+/*	rtn = vm_read(mach_task_self(), data1, vm_page_size, &data2, &data_cnt);
 	if (rtn!= KERN_SUCCESS) 
 		{
 			mach_error("vm_read returned value of ", rtn); 
@@ -104,7 +104,7 @@ kern_return_t vm_machine_attribute (
 	printf("Successful vm_read.\n");
 */
 
-//vm_write
+//vm_write可以在不同的任务中
 /**/
 
 //vm_region内存区域的属性
