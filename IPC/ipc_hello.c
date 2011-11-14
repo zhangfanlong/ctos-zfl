@@ -1,4 +1,4 @@
-/* Hello world à la mach ipc.
+/* Hello world ?la mach ipc.
    Copyright (C) 2002 Neal H. Walfield  <neal@cs.uml.edu>
 
    This is free software; you can redistribute it and/or modify it
