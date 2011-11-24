@@ -41,8 +41,7 @@ it with the netname service under the given object name.
 	if(hostname)
 	{
 		kr=netname_look_up(name_server_port,hostname,
-							object_name,
-							&netmemory_object);
+							object_name,&netmemory_server);
 		if (kr)
 			return kr;	
 	}
@@ -69,7 +68,7 @@ it with the netname service under the given object name.
 /*Cache the object locally. Note that even the master must do this.
 */
 	kr=netmemory_cache(netmemory_server,
-						netmemory_object,
+						netmemory_object
 						&memory_object);
 	if (kr)
 	{
