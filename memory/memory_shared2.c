@@ -1,5 +1,7 @@
 //怎样使用nameserver+memory_object进行内存共享--son
-/*
+
+/*该任务寻找存在的netmemory object，然后映射到自己的
+虚拟地址空间中，然后读写数据。
 
 */
 
@@ -13,7 +15,6 @@ int main(int argc, char *argv[])
 	mach_port_t netmemory_server;
 
 	mach_port_t netmemory_object;
-	mach_port_t netmemory_control;
 	mach_port_t memory_object;
 	
 	netname_name_t netmemory_object_name;
@@ -49,8 +50,8 @@ int main(int argc, char *argv[])
 
 //
 	kr=vm_map(mach_task_self(),&address,size,0,anywhere,
-					memory_object,0,FALSE,VM_PORT_DEFAULT,
-					VM_PORT_DEFAULT,VM_INHERIT_SHARE);
+					memory_object,0,FALSE,VM_PROT_DEFAULT,
+					VM_PROT_DEFAULT,VM_INHERIT_SHARE);
 
 	if (kr)
 		return kr;

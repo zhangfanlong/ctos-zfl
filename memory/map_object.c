@@ -84,8 +84,8 @@ it with the netname service under the given object name.
 		//set address
 
 		kr=vm_map(mach_task_self(),address,size,0,anywhere,
-					memory_object,0,FALSE,VM_PORT_DEFAULT,
-					VM_PORT_DEFAULT,VM_INHERIT_SHARE);
+					memory_object,0,FALSE,VM_PROT_DEFAULT,
+					VM_PROT_DEFAULT,VM_INHERIT_SHARE);
 		//¥¶¿Ìƒ⁄»›
 
 		if (kr)

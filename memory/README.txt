@@ -6,3 +6,4 @@
 （5）netmemory_server_op.c是netmemory server的操作。//incoming
 （6）map_object.c是使用（4）（5）进行内存共享的一个函数
 （7）memory_share.c是内存共享的例子。//没做
+（8）vm_address_t_and_vm_offset_t.c是关于vm_address_t_and_vm_offset_t的测试例子，确定这俩类型是什么。
