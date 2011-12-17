@@ -3,7 +3,6 @@
 This chapter discusses the specifics of the kernel’s virtual memory interfaces. 
 This includes memory status related functions associated with a single task. 
 ************************************************************
-
 */
 
 #include <mach.h>
@@ -50,14 +49,14 @@ int main(int argc,char ** argv)
     //write data1
 	
 	printf("init data1\n");
-	for(i=0;i<vm_page_size;i++)
+	for(i=0;i<1024;i++)
 	{
 		(&data1)[i]=i;
 	}
 */
 	/*
 	printf("printf data1\n");
-	for(i=0;i<vm_page_size;i++)
+	for(i=0;i<1024;i++)
 	{
 		printf("data1 shu ju wei %d\n",(&data1)[i]);
 	}
@@ -83,7 +82,7 @@ kern_return_t vm_copy(mach_port_t target_task,
 */
 	/*
 	printf("printf data2\n");
-	for(i=0;i<vm_page_size;i++)
+	for(i=0;i<1024;i++)
 	{
 		printf("data2 shu ju wei %d\n",(&data2)[i]);
 	}
@@ -133,9 +132,6 @@ kern_return_t vm_map(mach_port_t target_task,
 					 vm_port_t cur_protection,
 					 vm_port_t max_protection,
 					 vm_inherit_t inhertance);
-vm_offset_t offset:好像与内存对象有关系；
-vm_port_t cur_protection:
-vm_port_t max_protection:
 */
 
 

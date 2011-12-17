@@ -1,5 +1,6 @@
-/*关于vm_address_t和vm_offset_t的一些测试*/
-/*定义了vm_address_t和vm_offset_t的数据结构与该类型的指针，
+/*关于vm_address_t和vm_offset_t的一些测试
+vm_address_t和vm_offset_t是同一个东西，是无符号整数，占4个字节。
+定义了vm_address_t和vm_offset_t的数据结构与该类型的指针，
 写入数据100并查看。
 */
 # include <stdio.h>

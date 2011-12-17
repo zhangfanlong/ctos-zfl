@@ -44,7 +44,7 @@ kern_return_t memory_object_destroy(memory_object_control_t memory_control,
 
 //6.4 Memory Objects and Data
 /*memory_object_data_return：Writes data back to a memory object
-写数据咯
+写数据,将内存中data的数据写入到object中的offset中
 kern_return_t memory_object_data_return(memory_object_t memory_object, 
 										memory_object_control_t memory_control,
 										vm_offset_t offset, 
@@ -53,14 +53,16 @@ kern_return_t memory_object_data_return(memory_object_t memory_object,
 										boolean_t dirty, 
 										boolean_t kernel_copy);
 */
-/*
+/*memory_object_data_request:Requests data from a memory object
+使数据可以访问：调入到内存中，使得可以访问。
 kern_return_t memory_object_data_request(memory_object_t memory_object,
 									     memory_object_control_t memory_control,
 										 vm_offset_t offset,
 										 vm_offset_t length,
 										 vm_prot_t desired_access);
 */
-/*
+/*memory_object_data_supply：Supplies data for a region of a memory object
+不明白啊
 kern_return_t memory_object_data_supply (memory_object_control_t memory_control, 
 										 vm_offset_t offset, 
 										 vm_offset_t data, 
@@ -70,6 +72,8 @@ kern_return_t memory_object_data_supply (memory_object_control_t memory_control,
 										 mach_port_t reply);
 */
 /*
+The function memory_object_supply_completed indicates that 
+a previous memory_ object_data_supply has been completed.
 kern_return_t memory_object_supply_completed(memory_object_t memory_object, 
 											 memory_object_control t memory_control, 
 											 vm_offset_t offset, 
@@ -78,12 +82,18 @@ kern_return_t memory_object_supply_completed(memory_object_t memory_object,
 											 vm_offset_t error_offset);
 */
 /*
+The function memory_object_data_error indicates that the memory manager cannot 
+return the data requested for the given region, specifying a reason for the error. 
+This is typically used when a hardware error is encountered.
 kern_return_t memory_object_data_error (memory_object_control_t memory_control, 
 										vm_offset_t offset, 
 										vm_size_t size, 
 										kern_return_t reason);
 */
 /*
+The function memory_object_data_unavailable indicates that 
+the memory object does not have data for the given region and
+that the kernel should provide the data for this range. 
 kern_return_t memory_object_data_unavailable(memory_object_control_t memory_control, 
 											 vm_offset_t offset, 
 											 vm_size_t size, 
@@ -136,7 +146,7 @@ kern_return_t memory_object_set_attributes
 */
 
 
-//Default Memory Manager
+//6.7Default Memory Manager
 /*设置默认memory manager
 vm_set_default_memory_manager
 kern_return_t vm_set_default_memory_manager (host_t host,
@@ -152,10 +162,10 @@ kern_return_t memory_object_create(memory_object_t old_memory_object,
 									 vm_size_t new_page_size);
 */
 /*初始化创建的对象
-kern_return_t memory_object_data_initialize(memory_object_t memory_object, 
+kern_return_t memory_object_data_initialize(memory_object_t memory_object,
 											memory_object_control_t memory_control,
-											vm_offset_t offset, 
-											vm_offset_t data, 
+											vm_offset_t offset,//offset is the offset within a memory object to which this call refers.
+											vm_offset_t data,
 											vm_size_t data_count);
 */
 

@@ -8,72 +8,83 @@
  *
  *************************************************************/
 
-#include <mach_init.h>
 #include <mach.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-main(argc, argv)
-	int	argc;
-	char	*argv[];
+int main(argc, argv)
 {
-	int		*data1, *data2, *temp;
-	int		i;
-	kern_return_t	rtn;
+	vm_address_t data1,data2;
+	int	i;
+	kern_return_t	kr;
 
 	if (argc > 1) {
 		printf("vm_copy takes no switches.  ");
 		printf("This program is an example vm_copy\n");
-		exit();
+		exit(1);
 	}
 
-	if ((rtn = vm_allocate(task_self(), &data1, 
-		vm_page_size, TRUE)) != KERN_SUCCESS) {
-		mach_error("vm_allocate returned value of ", rtn);
-		printf("vm_copy: Exiting.\n");
-		exit();
-	}
+	kr=vm_allocate(mach_task_self(),&data1,vm_page_size,TRUE);
+	if (kr!= KERN_SUCCESS) 
+		{
+			mach_error("vm_allocate returned value of ", kr);
+			printf("vm_copy: Exiting.\n");
+			exit(1);
+		}
 
-	temp = data1;
-	for (i = 0; (i < vm_page_size / sizeof(int)); i++) 
-		temp[i] = i;
+	for (i = 0; (i < vm_page_size / sizeof(vm_address_t)); i++) 
+		{
+			(&data1)[i] = i;
+			//printf("%d\n",(&data1)[i]);
+		}	
 	printf("vm_copy: set data\n");
+	kr=vm_protect(mach_task_self(),data1,vm_page_size,FALSE,VM_PROT_READ|VM_PROT_WRITE);
+	kr=vm_protect(mach_task_self(),data2,vm_page_size,FALSE,VM_PROT_READ|VM_PROT_WRITE);
 
-	if ((rtn = vm_allocate(task_self(), &data2, 
-		vm_page_size, TRUE)) != KERN_SUCCESS) {
-		mach_error("vm_allocate returned value of ", rtn);
-		printf("vm_copy: Exiting.\n");
-		exit();
-	}
+	kr= vm_allocate(mach_task_self(),&data2,vm_page_size,TRUE);
+	if (kr!= KERN_SUCCESS)
+		{
+			mach_error("vm_allocate returned value of ", kr);
+			printf("vm_copy: Exiting.\n");
+			exit(1);
+		}
 
-	if ((rtn = vm_copy(task_self(), data1, vm_page_size,
-		data2)) != KERN_SUCCESS) {
-		mach_error("vm_copy returned value of ", rtn);
-		printf("vm_copy: Exiting.\n");
-		exit();
-	}
+	kr=vm_copy(mach_task_self(),data1,vm_page_size,data2);
+	if (kr!= KERN_SUCCESS)
+		{
+			mach_error("vm_copy returned value of ", kr);
+			printf("vm_copy: Exiting.\n");
+			exit(1);
+		}
 	printf("vm_copy: copied data\n");
 
-	for (i = 0; (i < vm_page_size / sizeof(int)); i++) {
-		if (data1[i] != data2[i]) {
-			printf("vm_copy: Data not copied correctly.\n");
-			printf("vm_copy: Exiting.\n");
-			exit();
+	for (i = 0; (i < vm_page_size / sizeof(vm_address_t)); i++)
+		{
+			if ((&data1)[i] != (&data2)[i])
+				{
+					printf("vm_copy: Data not copied correctly.\n");
+					printf("vm_copy: Exiting.\n");
+					exit(1);
+				}
 		}
-	}
+		
 	printf("vm_copy: Successful vm_copy.\n");
 
-	if ((rtn = vm_deallocate(task_self(), data1, 
-		vm_page_size)) != KERN_SUCCESS) {
-		mach_error("vm_deallocate returned value of ", rtn);
-		printf("vm_copy: Exiting.\n");
-		exit();
-	}
+	kr=vm_deallocate(mach_task_self(),data1,vm_page_size);
+	if(kr!= KERN_SUCCESS)
+		{
+			mach_error("vm_deallocate returned value of ", kr);
+			printf("vm_copy: Exiting.\n");
+			exit(1);
+		}
 
-	if ((rtn = vm_deallocate(task_self(), data2, 
-		vm_page_size)) != KERN_SUCCESS) {
-		mach_error("vm_deallocate returned value of ", rtn);
-		printf("vm_copy: Exiting.\n");
-		exit();
-	}
+	kr=vm_deallocate(mach_task_self(),data2,vm_page_size);
+	if(kr!= KERN_SUCCESS)
+		{
+			mach_error("vm_deallocate returned value of ", kr);
+			printf("vm_copy: Exiting.\n");
+			exit(1);
+		}
+	
 	printf("vm_copy: Finished successfully!\n");
 }
