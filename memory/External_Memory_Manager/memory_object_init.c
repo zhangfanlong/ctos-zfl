@@ -1,3 +1,7 @@
+/*
+主动调用使用memory_object_init（）以及memory_object_destroy（）。
+*/
+
 #include<stdio.h>
 #include<mach.h>
 
@@ -5,8 +9,9 @@ int main()
 {
 
 /*使用memory_object_init（）以及memory_object_destroy（）
-  失败。返回错误都是：(ipc/send) invalid destination port.
-	    kr值：kr=268435459
+  失败。
+  返回错误都是：(ipc/send) invalid destination port.
+	      kr值：kr=268435459
 */
     memory_object_t memory_object;
 	memory_object_control_t memory_control;
@@ -32,7 +37,7 @@ int main()
 			printf("memory_object_destroy() is exiting.kr=%d\n",kr);
 			//return kr;
 		}
-	printf("every thing is ok,and main is exiting\n");
+	//printf("every thing is ok,and main is exiting\n");
 
 	
 	return 0;
