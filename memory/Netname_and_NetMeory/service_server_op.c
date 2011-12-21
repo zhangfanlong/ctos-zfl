@@ -1,13 +1,13 @@
-/*serveice server
+//serveice_server_op.c
+
+/*
 The service server provides a registry for the service server itself, 
 the name server and the environment server. 
 It exists so that the ports for these servers can be created 
 at system initialization while the servers themselves are initialized later.
-
 //libmach.a 
 //#include <servers/service.h>
 */
-
 
 #include <servers/service.h>
 #include <stdio.h>

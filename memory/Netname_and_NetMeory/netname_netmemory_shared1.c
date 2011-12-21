@@ -1,8 +1,8 @@
-//怎样使用nameserver+memory_object进行内存共享
-/*该任务创建netmemory object，并且发布到netname server，
+//netname_netmemory_shared11.c
+
+/*//怎样使用nameserver+memory_object进行内存共享.
+该任务创建netmemory object，并且发布到netname server，
 并且映射到自己的虚拟内存空间中，然后写数据。
-
-
 */
 
 #include <mach.h>

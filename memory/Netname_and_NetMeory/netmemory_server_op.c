@@ -1,7 +1,7 @@
-//nermemory_server.c
+//netmemory_server_op.c
+
 /*The netmemory server provides shared memory objects 
 whose contents are maintained consistently when mapped by multiple hosts.
-
 
 Warning:libmach.a
 */

@@ -1,3 +1,5 @@
+//vm_copy.c
+
 /* 
  * This program is a test of vm_allocate, vm_copy and vm_deallocate.
  * First some memory is allocated, and filled with data.  
@@ -5,8 +7,7 @@
  * the contents of the first chunk to the second.  The data of the two
  * spaces is compared to be sure it is the same, checking vm_copy.
  * vm_deallocate is then used to rid of the two chunks of memory.
- *
- *************************************************************/
+ */
 
 #include <mach.h>
 #include <stdio.h>

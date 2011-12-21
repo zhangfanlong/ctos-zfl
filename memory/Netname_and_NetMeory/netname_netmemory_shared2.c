@@ -1,8 +1,8 @@
-//怎样使用nameserver+memory_object进行内存共享--son
+//netname_netmemory_shared2.c
 
-/*该任务寻找存在的netmemory object，然后映射到自己的
+/*怎样使用nameserver+memory_object进行内存共享--son.
+该任务寻找存在的netmemory object，然后映射到自己的
 虚拟地址空间中，然后读写数据。
-
 */
 
 #include <mach.h>

@@ -1,13 +1,13 @@
-/* 
- * 
+//vm_read.c
+
+/*  
  * This program is a test of vm_allocate, vm_read and vm_deallocate.
  * First some memory is allocated, and filled with data.  vm_read is
  * then called, with reading starting at the previously allocated chunk.
  * The contents of the two pieces of memory, one retreived by vm_allocate, and
  * one by vm_read is compared. vm_deallocate is then used to rid of the
  * two chunks of memory.
- *
- *************************************************************/
+ */
 
 #include <mach.h>
 #include <stdio.h>

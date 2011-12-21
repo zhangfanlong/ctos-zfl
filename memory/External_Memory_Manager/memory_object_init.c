@@ -1,5 +1,13 @@
+//memory_object_init.c
+
 /*
-主动调用使用memory_object_init（）以及memory_object_destroy（）。
+主动显示的调用memory_object_init（）以及memory_object_destroy（）。
+*/
+
+/*使用memory_object_init（）以及memory_object_destroy（）
+  失败。
+  返回错误都是：(ipc/send) invalid destination port.
+	      kr值：kr=268435459
 */
 
 #include<stdio.h>
@@ -7,12 +15,6 @@
 
 int main()
 {
-
-/*使用memory_object_init（）以及memory_object_destroy（）
-  失败。
-  返回错误都是：(ipc/send) invalid destination port.
-	      kr值：kr=268435459
-*/
     memory_object_t memory_object;
 	memory_object_control_t memory_control;
 	memory_object_name_t memory_object_name;

@@ -1,4 +1,10 @@
 //GNU Mach External Memory Management
+//gun_external_memory_op.c
+
+/*
+外部内存管理的所有接口。
+可以使用内存对象和vm_map()完成内存共享，怎样实现还在探索中。
+*/
 
 #include <mach.h>
 #include <stdio.h>
@@ -13,7 +19,7 @@ boolean_t seqnos_memory_object_server (msg header t *in_msg, msg header t *out_m
 boolean_t seqnos_memory_object_default_server (msg header t *in_msg, msg header t *out_msg);
 
 
-//6.2 Memory Object Creation
+//6.2 Memory Object Creation内存对象创建
 //memory_object_init():Initializes a memory object
 kern_return_t memory_object_init(memory_object_t memory_object,
 								 memory_object_control_t memory_control,

@@ -1,8 +1,11 @@
+//map_object.c
+
 /*The following is a routine which demonstrates 
 how to use the netmemory server.
 解释了怎样使用netmemory server完成内存共享
 */
 
+#include <mach.h>
 #include <servers/netname.h>
 
 

@@ -1,7 +1,7 @@
+//mach_self.c
 /*获得一些基本信息：
 使用mach_task_self()获得task.
 使用mach_host_self()获得host.
-
 */
 #include <stdio.h>
 #include <mach.h>

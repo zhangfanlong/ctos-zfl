@@ -1,4 +1,5 @@
 //name_server_op.c 
+
 /*是关于name server的一些操作，这个服务是：snames。
 The name server provides a registry mapping service names to 
 ports attached to the servers providing the named service.
