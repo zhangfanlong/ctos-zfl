@@ -10,6 +10,12 @@
   使用memory_object_create(),memory_object_destroy()
   失败。返回错误都是：(ipc/send) invalid destination port.
 	    kr值：kr=268435459
+
+  错误分析：
+  这几个接口作用是修改默认的memory manager，并且使用修改后的memory manager
+  进行对内存对象的处理。 
+  没有新的memory manager，所以无法修改memory manager，也没有办法使用新的memory manager
+  创建、初始化、销毁memory object。
 */
 
 #include<stdio.h>
@@ -25,8 +31,9 @@ int main()
 	kern_return_t kr;
 	kern_return_t reason=0;
 	
-	printf("mach_host-self() is %d\n",mach_host_self());
 	
+	printf("mach_host_self() is %d\n",mach_host_self());
+/*	
 	kr=vm_set_default_memory_manager(mach_host_self(),
 									 &default_manger);
 	if(kr)
@@ -35,7 +42,8 @@ int main()
 			printf("vm_set_default_memory_manager() is exiting:kr=%d\n",kr);
 			return kr;
 		}
-	//printf("memory_object_init is ok\n");								 
+*/
+	printf("memory_object_creat is begin\n");								 
 	kr=memory_object_create(MEMORY_OBJECT_NULL,//MEMORY_OBJECT_NULL
 							new_memory_object,
 							vm_page_size,
@@ -64,6 +72,8 @@ int main()
 	//printf("memory_object_data_initialize is ok\n");
 	*/
 	
+	//destory memory object;
+	reason=0;
 	kr=memory_object_destroy(new_control,reason);
 	if(kr)
 		{

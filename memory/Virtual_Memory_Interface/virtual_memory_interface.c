@@ -1,6 +1,7 @@
 //virtual_memory_interface.c
 
 /*
+虚拟内存接口：包括这一章中全部的函数使用。
 */
 
 int main(int argc,char* argv[])

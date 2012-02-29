@@ -1,13 +1,17 @@
 //memory_object_init.c
 
 /*
-主动显示的调用memory_object_init（）以及memory_object_destroy（）。
+主动显示调用memory_object_init（）以及memory_object_destroy（）函数。
 */
 
 /*使用memory_object_init（）以及memory_object_destroy（）
   失败。
   返回错误都是：(ipc/send) invalid destination port.
 	      kr值：kr=268435459
+ 失败原因：
+	[自己分析]memory_object_init（）是不可以显示调用的，应该是由内核调用的。
+	内存对象压根就没有建立，销毁是也是不可能完成的工作了，所以也会出错。
+    使用vm_map（）进行试验看看。
 */
 
 #include<stdio.h>

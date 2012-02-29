@@ -13,6 +13,11 @@ int main(int argc, char *argv[])
 {
 
 //6.1 Memory Object Server
+/*A memory manager is a server task that responds to 
+specific messages from the kernel in order to 
+handle memory management functions for the kernel.
+*/
+//为内核处理message。
 boolean_t memory_object_server (msg header t *in_msg, msg header t *out_msg);
 boolean_t memory_object_default_server (msg header t *in_msg, msg header t *out_msg);
 boolean_t seqnos_memory_object_server (msg header t *in_msg, msg header t *out_msg);
@@ -20,6 +25,10 @@ boolean_t seqnos_memory_object_default_server (msg header t *in_msg, msg header 
 
 
 //6.2 Memory Object Creation内存对象创建
+/*
+memory_object_init()；
+memory_object_ready()；
+*/
 //memory_object_init():Initializes a memory object
 kern_return_t memory_object_init(memory_object_t memory_object,
 								 memory_object_control_t memory_control,
@@ -33,6 +42,10 @@ kern_return_t memory_object_ready(memory_object_control_t memory_control,
 
 
 //6.3 Memory Object Termination
+/*
+memory_object_terminate();
+memory_object_destroy();
+*/
 //memory_object_terminate():Relinquishes access to a memory object
 kern_return_t memory_object_terminate(memory_object_t memory_object,
 									  memory_object_control_t memory_control,
@@ -43,6 +56,15 @@ kern_return_t memory_object_destroy(memory_object_control_t memory_control,
 									kern_return_t reason);
 
 //6.4 Memory Objects and Data
+/*
+memory_object_data_return();
+memory_object_data_request();
+memory_object_data_supply();
+memory_object_supply_completed();
+memory_object_data_error();
+memory_object_data_unavailable();
+memory_object_copy()
+*/
 //memory_object_data_return()：Writes data back to a memory object
 //写数据,将内存中data的数据写入到object中的offset中
 kern_return_t memory_object_data_return(memory_object_t memory_object,
@@ -74,8 +96,9 @@ kern_return_t memory_object_data_supply (memory_object_control_t memory_control,
 										 boolean_t precious,
 										 mach_port_t reply);
 
-/*
-The function memory_object_supply_completed indicates that 
+
+//memory_object_supply_completed():
+/*The function memory_object_supply_completed indicates that 
 a previous memory_ object_data_supply has been completed.
 */
 //supply 是否完成。
@@ -126,6 +149,11 @@ memory_object_data_provided();
 
 
 //6.5Memory Object Locking
+/*
+memory_object_lock_request();
+memory_object_lock_completed();
+memory_object_data_unlock();
+*/
 //Restricts access to memory object data
 kern_return_t memory_object_lock_request(memory_object_control_t memory_control,
 										 vm_offset_t offset,
@@ -145,6 +173,11 @@ kern_return_t memory_object_data_unlock(memory_object_t memory_object,
 										vm_prot_t desired_access);
 
 //6.6 Memory Object Attributes
+/*
+memory_object_get_attributes();
+memory_object_change_attributes();
+memory_object_change_completed();
+*/
 //The memory_object_get_attributes function retrieves the current attributes for the specified memory object.
 kern_return_t memory_object_get_attributes(memory_object_control_t memory_control,
 										   boolean_t *object_ready,
@@ -167,6 +200,11 @@ kern_return_t memory_object_set_attributes
 
 
 //6.7Default Memory Manager
+/*
+vm_set_default_memory_manager();
+memory_object_create();
+memory_object_data_initialize();
+*/
 //设置默认memory manager:vm_set_default_memory_manager
 kern_return_t vm_set_default_memory_manager (host_t host,
 											 mach_port_t *default_manager);
@@ -188,5 +226,8 @@ kern_return_t memory_object_data_initialize(memory_object_t memory_object,
 											vm_offset_t data,
 											vm_size_t data_count);
 
+											
+											
+											
 	return 0;
 }
