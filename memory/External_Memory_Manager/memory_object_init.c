@@ -32,7 +32,7 @@ int main()
 		{
 			mach_error("the value of error is",kr);
 			printf("memory_object_init() is exiting:%d\n",kr);
-			//return kr;
+			return kr;
 		}
 	printf("memory_object_init is ok\n");
 
