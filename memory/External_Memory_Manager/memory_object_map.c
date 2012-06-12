@@ -4,6 +4,7 @@ memory_object_mmap.c
 */
 
 /*使用vm_map()创建新的内存对象，并对其进行一系列的操作尝试。
+主要使用memory object内存对象相关的接口。
 */
 
 #include <mach.h>
@@ -21,9 +22,9 @@ int main(int argc, char** argv)
 	memory_object_t memory_object=MEMORY_OBJECT_NULL;
 	vm_offset_t offset=0;
 	boolean_t copy=FALSE;
-	vm_prot_t cur_protection=(VM_PORT_READ|VM_PORT_WRITE);//当前保护属性
-	vm_prot_t max_protection=(VM_PORT_READ|VM_PORT_WRITE);//最大保护属性
-	vm_inherit_t inheritance=VM_INHERIT_SHARE;//共享
+	vm_prot_t cur_protection=(VM_PORT_READ|VM_PORT_WRITE);//当前保护属性，读写
+	vm_prot_t max_protection=(VM_PORT_READ|VM_PORT_WRITE);//最大保护属性，读写
+	vm_inherit_t inheritance=VM_INHERIT_SHARE;//共享，设置共享
 
 	kr=0;
 
@@ -38,10 +39,6 @@ int main(int argc, char** argv)
 			return kr;
 		}
 	printf("vm_map is ok\n");
-	
-	
-	
-				
 	
 
 }
