@@ -13,14 +13,14 @@ This includes memory status related functions associated with a single task.
 
 int main(int argc,char ** argv)
 {
-	/*define something
+	//define something
 	vm_address_t data1;
 	vm_address_t data2;
 	vm_offset_t data3;
 
 	int data_cnt,i,min;
 	kern_return_t kr;
-	*/
+	
 
 //vm_allcate():Function — Allocates a region of virtual memory
 /*kern_return_t vm_allocate(vm_task_t(or mach_port_t) target_task, 
@@ -28,7 +28,7 @@ int main(int argc,char ** argv)
 							vm_size_t size, 
 							boolean_t anywhere);
 */
-/*kr=vm_allocate(mach_task_self(),&data1,vm_page_size,TRUE);
+   kr=vm_allocate(mach_task_self(),&data1,vm_page_size,TRUE);
 	if (kr!= KERN_SUCCESS) 
 		{
 			mach_error("vm_allocate returned value of ", kr);
@@ -53,16 +53,17 @@ int main(int argc,char ** argv)
 	printf("init data1\n");
 	for(i=0;i<1024;i++)
 	{
+	    
 		(&data1)[i]=i;
 	}
-*/
-	/*
+
+	
 	printf("printf data1\n");
 	for(i=0;i<1024;i++)
 	{
 		printf("data1 shu ju wei %d\n",(&data1)[i]);
 	}
-	*/
+
 
 
 //vm_copy:Function — Copies a region in a task’s virtual memory(在同一个任务中);
@@ -73,7 +74,7 @@ kern_return_t vm_copy(mach_port_t target_task,
 					  vm_address_t dest_address);
 */
 
-/*	kr=vm_copy(mach_task_self(),data1,vm_page_size,data2);
+	kr=vm_copy(mach_task_self(),data1,vm_page_size,data2);
 	if (kr!= KERN_SUCCESS) 
 		{
 			mach_error("vm_copy returned value of ", kr);
@@ -81,14 +82,14 @@ kern_return_t vm_copy(mach_port_t target_task,
 			exit(0);
 		}
 	printf("vm_copy is ok\n");
-*/
-	/*
+
+
 	printf("printf data2\n");
 	for(i=0;i<1024;i++)
 	{
 		printf("data2 shu ju wei %d\n",(&data2)[i]);
 	}
-	*/
+	
 
 
 //vm_deallcate():Function — De-allocates a region of virtual memory
@@ -227,7 +228,7 @@ kern_return_t vm_write(mach_port_t target_task,
 
 
 //vm_deallocate
-/*	kr = vm_deallocate(mach_task_self(), data1, vm_page_size);
+	kr = vm_deallocate(mach_task_self(), data1, vm_page_size);
 	if (kr!= KERN_SUCCESS) 
 				{
 					mach_error("vm_deallocate returned value of ", kr);
@@ -253,6 +254,6 @@ kern_return_t vm_write(mach_port_t target_task,
 					exit(0);
 				}
 	printf("vm_deallcate data3 is ok !\n");
-*/	
+	
 	return 0;
 }

@@ -1,0 +1,109 @@
+<html>
+<head>
+<script type="text/javascript" src="./sjcl.js"></script>
+<script>
+
+//JSON To String  
+function obj2str(o) {  
+    var r = [];  
+    if (typeof o == "string") return "\"" + o.replace(/([\'\"\\])/g, "\\$1").replace(/(\n)/g, "\\n").replace(/(\r)/g, "\\r").replace(/(\t)/g, "\\t") + "\"";  
+    if (typeof o == "object") {  
+        if (!o.sort) {  
+            for (var i in o)  
+                r.push("\"" + i + "\":" + obj2str(o[i]));  
+            if (!!document.all && !/^\n?function\s*toString\(\)\s*\{\n?\s*\[native code\]\n?\s*\}\n?\s*$/.test(o.toString)) {  
+                r.push("toString:" + o.toString.toString());  
+            }  
+            r = "{" + r.join() + "}" 
+        } else {  
+            for (var i = 0; i < o.length; i++)  
+                r.push(obj2str(o[i]))  
+            r = "[" + r.join() + "]" 
+        }  
+        return r;  
+    }  
+    return o.toString();  
+}
+
+chrome.extension.onRequest.addListener(
+  function(request, sender, sendResponse) {
+//    console.log(sender.tab ?
+ //               "from a content script:" + sender.tab.url :
+   //             "from the extension");
+	if (request.msgType == "jump" && request.pageJumpType != "noJump")
+    {	
+      //alert("back" + response.urlHref);
+      sendResponse({farewell: "goodbye"});
+      chrome.tabs.getSelected(null, function(tab) {
+      chrome.tabs.sendRequest(tab.id, request, function(response) {
+      console.log(response.farewell);
+      chrome.cookies.getAll({}, function (allcookie) {
+	for (var i in allcookie)
+	{
+		var cookie = allcookie[i];
+ 		var url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain + cookie.path;
+//console.log(cookie);
+//		cookiesStr += "url:" + cookie.domain;
+// chrome.cookies.remove({"url": url, "name": cookie.name});
+	}
+	console.log(sjcl.decrypt("password",sjcl.encrypt("password", obj2str(allcookie))));
+});
+      });
+});
+    }
+    else if (request.msgType == "getCookies")
+    {
+	var cookiesArr = [];
+    	chrome.cookies.getAll({}, function (allcookie) {
+        	for (var i in allcookie)
+        	{
+                	var cookie = allcookie[i];
+			if (cookie.domain != "127.0.0.1")
+			{
+				cookiesArr.push(cookie);
+			}
+        	}
+		var rvalue = sjcl.encrypt("password", obj2str(cookiesArr));
+		sendResponse({cookies: rvalue});
+       	 	//console.log(sjcl.decrypt("password",sjcl.encrypt("password", obj2str(allcookie))));
+		});
+		//console.log("try to get Cookie");
+	
+    }
+    else if (request.msgType == "setCookies")
+    {
+        var cookiesJson = sjcl.decrypt("password", request.cookies);
+	var cookies = eval("(" + cookiesJson + ")");
+	for (var i in cookies)
+	{
+		var cookie = cookies[i];
+		var url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain + cookie.path;
+		//chrome.cookies.set(cookies[i], function(e){});
+		console.log(cookies[i]);
+		chrome.cookies.set({"url": url, "name": cookie.name, "value": cookie.value, "domain": cookie.domain, "path": cookie.path, "secure": cookie.secure, "httpOnly": cookie.httpOnly, "expirationDate": cookie.expirationDate, "storeId": cookie.storeId});
+	}
+	console.log("try to setCookie");
+    }
+    else if (request.msgType == "delCookies")
+    {
+	chrome.cookies.getAll({}, function(allcookie){
+		for (var i in allcookie)
+		{
+			var cookie = allcookie[i];
+			if (cookie.domain != "127.0.0.1")
+			{
+				var url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain + cookie.path;
+  				chrome.cookies.remove({"url": url, "name": cookie.name});
+				//chrome.cookies.remove({"url": url, "name": cookie.name});
+			//	chrome.cookies.remove(cookie, function(e){});
+			}	
+		}
+	});
+	console.log("try to remove cookie");
+    }
+    else
+      sendResponse({}); // snub them.
+  });
+</script>
+</head>
+</html>

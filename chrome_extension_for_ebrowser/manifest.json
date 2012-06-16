@@ -1,0 +1,19 @@
+{
+  "name": "ebrowser",
+  "version": "1.0",
+  "background_page": "background.html",
+  "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "ebrowser.js" ],
+      "matches": [ "<all_urls>" ]
+   } ],
+
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*", "cookies"
+  ],
+  "browser_action": {
+      "default_title": "Set this page's color.",
+      "default_icon": "icon.png",
+      "popup": "popup.html"
+  }
+}
