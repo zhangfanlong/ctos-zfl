@@ -1,2 +1,0 @@
-/* @configure_input@ */
-const char version[] = "@PACKAGE_NAME@ @PACKAGE_VERSION@";

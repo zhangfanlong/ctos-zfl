@@ -1,12 +1,22 @@
 这是关于CTOS的代码：
-（1）BPI文件夹：浏览器编程接口。
-//（2）browser：网络浏览器，别人的，暂时无用。
-//（3）chrome_extension_for_ebrowser：一个插件，别人的，暂时无用。
-//（4）crypt：不知道，别人的，暂时无用
-（5）IPC文件夹：是关于一些HURD的ipc通信例子。、
-（6）Memory：是虚拟内存操作和内存共享的例子。
-（7）MIG：MIG自动生成代码通信。
-（8）System_Call： Mach内核的新的系统调用内核代码。
-（9）Posix_Memory：HURD下POSIX内存共享。
-（10）System_Call：Mach内核的新的系统调用。
-（11）WebKit:WebKit的内容，只是分析了，没有改写代码。
+（1）BPI文件夹：
+	是有关bpi的东西。
+（2）IPC文件夹：
+	是关于一些HURD的ipc通信例子。
+（3）Mach_System_Call文件夹;
+        是Mach内核的新的系统调用内核代码。
+（4）Memory文件夹：
+	是虚拟内存操作和内存共享的例子。
+（5）MIG文件夹:
+        是MIG使用的例子。
+（6）Posix_Memory文件夹：
+	是HURD下POSIX内存共享的例子。
+（7）System_Call_Test文件夹：
+        是Mach内核的新的系统调用测试代码。
+（5）WebKit文件夹:
+	是关于WebKit的东西，只是分析了，没有改写代码。
+
+注：
+（3）是尝试。
+（1）和（2）是使用GNU Mach的基础。
+（4）和（5）是核心。

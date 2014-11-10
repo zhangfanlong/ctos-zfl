@@ -1,2 +1,0 @@
-#define UTS_RELEASE "2.0.36"
-#define LINUX_VERSION_CODE 131108

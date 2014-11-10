@@ -1,4 +1,4 @@
-这里是关于内存操作和内存共享的例子。
+这里是关于内存操作和内存共享的例子，正在做。
 （1）gun_external_memory_op.c，是全部接口的索引以及使用。
 
 （2）default_memory_manager.c，是default_memory_manager默认内存管理的三个接口的使用。
